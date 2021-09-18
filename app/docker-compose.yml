@@ -6,7 +6,7 @@ services:
                 restart: always
                 container_name: db-mysql
                 ports:
-                        - 3306:3306
+                        - "3306:3306"
                 environment:
                         MYSQL_DATABASE: testapp
                         MYSQL_ROOT_PASSWORD: helloworld
@@ -16,5 +16,7 @@ services:
                         - ./dump:/docker-entrypoint-initdb.d
         app.py:
                 build: .
+                restart: always
+                container_name: app.py
                 ports:
-                        - "5000:5000"  
+                        - "5000:5000"
