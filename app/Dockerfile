@@ -11,4 +11,4 @@ copy static ./static
 copy dump ./dump
 run pip install -r requirements.txt
 expose 5000
-cmd ["python3", "app.py"]
+cmd ["flask", "run"]
