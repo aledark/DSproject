@@ -6,7 +6,6 @@ run apk add --no-cache gcc musl-dev linux-headers
 run apk add --no-cache build-base
 copy requirements.txt requirements.txt
 copy app.py app.py
-copy test.db test.db
 copy templates ./templates
 copy static ./static
 copy dump ./dump
