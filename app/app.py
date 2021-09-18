@@ -5,9 +5,10 @@ app = Flask(__name__)
 #
 # Coneccion a la base de datos
 #
-connection = pymysql.connect(host='127.0.0.1',
-                              user='root',
+connection = pymysql.connect(user='root',
                               password='helloworld',
+                              host='db',
+                              port='3306',
                               database='testapp',
                               cursorclass=pymysql.cursors.DictCursor)
 
