@@ -8,7 +8,7 @@ copy requirements.txt requirements.txt
 copy app.py app.py
 copy templates ./templates
 copy static ./static
-copy dump ./dump
+copy db ./db
 run pip install -r requirements.txt
 expose 5000
 cmd ["flask", "run"]
