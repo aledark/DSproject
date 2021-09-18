@@ -12,4 +12,4 @@ copy dump ./dump
 run pip install -r requirements.txt
 expose 5000
 expose 3306
-cmd ["flask", "run"]
+cmd ["python3", "app.py"]

@@ -1,7 +1,14 @@
 version: "3.3"
 
 services:
-        mysql:
+        app.py:
+                build: .
+                container_name: app.py
+                links:
+                        - db
+                ports:
+                        - "5000:5000"
+        db:
                 image: mysql
                 restart: always
                 container_name: db-mysql
@@ -13,10 +20,4 @@ services:
                         MYSQL_USER: testuser
                         MYSQL_PASSWORD: testpassword
                 volumes:
-                        - ./dump:/docker-entrypoint-initdb.d
-        app.py:
-                build: .
-                restart: always
-                container_name: app.py
-                ports:
-                        - "5000:5000"
+                        - ./dump:/docker-entrypoint-initdb.d/:ro
