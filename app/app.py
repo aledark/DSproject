@@ -13,7 +13,7 @@ connection = pymysql.connect(host='127.0.0.1',
 
 @app.route('/', methods=['POST','GET'])
 def index(): 
-    if request.method == 'POST': 
+    if request.method == 'POST':
         if request.json and 'content' in request.json:
             task_content = request.json.get('content',"")
         else: 
@@ -25,7 +25,10 @@ def index():
                 sql = "INSERT INTO tasks (content) VALUES (%s)"
                 cursor.execute(sql, task_content)
                 connection.commit()
-                return redirect('/') 
+                if request.json:
+                    return "Recorded!"
+                else: 
+                    return redirect('/')  
         except: 
             return 'There was an issue adding your task' 
     else: 
