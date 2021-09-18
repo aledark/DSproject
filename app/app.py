@@ -5,11 +5,11 @@ app = Flask(__name__)
 #
 # Coneccion a la base de datos
 #
-connection = pymysql.connect(user='root',
-                            password='helloworld',
-                            host='127.0.0.1',
-                            database='testapp',
-                            cursorclass=pymysql.cursors.DictCursor)
+config = {'user':'root',
+        'password':'helloworld',
+        'host':'127.0.0.1',
+        'database':'testapp',
+        'cursorclass':pymysql.cursors.DictCursor}
 
 @app.route('/', methods=['POST','GET'])
 def index(): 
@@ -20,6 +20,7 @@ def index():
             task_content = request.form['content'] 
         #
         try: 
+            connection = pymysql.connect(**config)
             with connection.cursor() as cursor:
             # Crear una nueva tarea
                 sql = "INSERT INTO tasks (content) VALUES (%s)"
@@ -31,13 +32,17 @@ def index():
                     return redirect('/')  
         except: 
             return 'There was an issue adding your task' 
-    else: 
-        with connection.cursor() as cursor:
-            # Leer un registro de la base de datos
-            sql = "SELECT * FROM tasks"
-            cursor.execute(sql)
-            tasks = cursor.fetchall()
-        return render_template('index.html', tasks=tasks)
+    else:
+        try:
+            connection = pymysql.connect(**config)
+            with connection.cursor() as cursor:
+                # Leer un registro de la base de datos
+                sql = "SELECT * FROM tasks"
+                cursor.execute(sql)
+                tasks = cursor.fetchall()
+            return render_template('index.html', tasks=tasks)
+        except:
+            return 'There was an showing tasks' 
 
 @app.route('/delete/<int:id>', methods=['GET','DELETE'])
 def delete(id):
