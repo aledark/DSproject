@@ -5,10 +5,8 @@ app = Flask(__name__)
 #
 # Coneccion a la base de datos
 #
-config = {'user':'root',
-        'password':'helloworld',
-        'host':'127.0.0.1',
-        'database':'testapp'}
+def getMysqlConnection():
+    return pymysql.connect(host='db', user='root', port='3306', password='helloworld', database='testapp', cursorclass=pymysql.cursors.DictCursor)
 
 @app.route('/', methods=['POST','GET'])
 def index(): 
@@ -19,7 +17,7 @@ def index():
             task_content = request.form['content'] 
         #
         try: 
-            connection = pymysql.connect(**config)
+            connection = getMysqlConnection()
             with connection.cursor() as cursor:
             # Crear una nueva tarea
                 sql = "INSERT INTO tasks (content) VALUES (%s)"
@@ -34,7 +32,7 @@ def index():
             return 'There was an issue adding your task' 
     else:
         try:
-            connection = pymysql.connect(**config)
+            connection = getMysqlConnection()
             with connection.cursor() as cursor:
                 # Leer un registro de la base de datos
                 sql = "SELECT * FROM tasks"
