@@ -8,8 +8,7 @@ app = Flask(__name__)
 config = {'user':'root',
         'password':'helloworld',
         'host':'127.0.0.1',
-        'database':'testapp',
-        'cursorclass':pymysql.cursors.DictCursor}
+        'database':'testapp'}
 
 @app.route('/', methods=['POST','GET'])
 def index(): 
@@ -26,6 +25,7 @@ def index():
                 sql = "INSERT INTO tasks (content) VALUES (%s)"
                 cursor.execute(sql, task_content)
                 connection.commit()
+                connection.close()
                 if request.json:
                     return "Recorded!"
                 else: 
@@ -40,6 +40,7 @@ def index():
                 sql = "SELECT * FROM tasks"
                 cursor.execute(sql)
                 tasks = cursor.fetchall()
+                connection.close()
             return render_template('index.html', tasks=tasks)
         except:
             return 'There was an showing tasks' 
