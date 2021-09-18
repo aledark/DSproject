@@ -39,9 +39,9 @@ def index():
                 cursor.execute(sql)
                 tasks = cursor.fetchall()
                 connection.close()
-            return render_template('index.html', tasks=tasks)
+                return render_template('index.html', tasks=tasks)
         except:
-            return 'There was an showing tasks' 
+            return 'There was a problem showing the tasks' 
 
 @app.route('/delete/<int:id>', methods=['GET','DELETE'])
 def delete(id):
