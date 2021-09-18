@@ -18,6 +18,8 @@ services:
                 container_name: app.py
                 depends_on:
                         - db_mysql
+                links:
+                        - db_mysql:db_mysql
                 ports:
                         - "5000:5000"
         
