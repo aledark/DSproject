@@ -6,11 +6,10 @@ app = Flask(__name__)
 # Coneccion a la base de datos
 #
 connection = pymysql.connect(user='root',
-                              password='helloworld',
-                              host='db',
-                              port='3306',
-                              database='testapp',
-                              cursorclass=pymysql.cursors.DictCursor)
+                            password='helloworld',
+                            host='db',
+                            database='testapp',
+                            cursorclass=pymysql.cursors.DictCursor)
 
 @app.route('/', methods=['POST','GET'])
 def index(): 
