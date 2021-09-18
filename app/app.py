@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Coneccion a la base de datos
 #
 def getMysqlConnection():
-    return pymysql.connect(host='db_mysql', user='root', port='3306', password='helloworld', database='testapp', cursorclass=pymysql.cursors.DictCursor)
+    return pymysql.connect(host='db_mysql', user='root', port=3306, password='helloworld', database='testapp', cursorclass=pymysql.cursors.DictCursor)
 
 @app.route('/', methods=['POST','GET'])
 def index(): 
@@ -40,8 +40,9 @@ def index():
                 tasks = cursor.fetchall()
                 connection.close()
                 return render_template('index.html', tasks=tasks)
-        except:
-            return 'There was a problem showing the tasks' 
+        except Exception as e:
+            print(e)
+            return 'There was a problem showing the tasks ' 
 
 @app.route('/delete/<int:id>', methods=['GET','DELETE'])
 def delete(id):
