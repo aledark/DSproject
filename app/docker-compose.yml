@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-        db:
+        db_mysql:
                 image: mysql
                 container_name: db_mysql
                 ports:
@@ -12,7 +12,7 @@ services:
                         MYSQL_USER: testuser
                         MYSQL_PASSWORD: testpassword
                 volumes:
-                        - ./dump:/docker-entrypoint-initdb.d/:ro
+                        - ./db:/docker-entrypoint-initdb.d/:ro
         app.py:
                 build: .
                 container_name: app.py
