@@ -17,7 +17,7 @@ services:
                 build: .
                 container_name: app.py
                 depends_on:
-                        - db
+                        - db_mysql
                 ports:
                         - "5000:5000"
         
