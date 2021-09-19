@@ -13,6 +13,9 @@ services:
                         MYSQL_PASSWORD: testpassword
                 volumes:
                         - ./db:/docker-entrypoint-initdb.d/:ro
+                deploy:
+                        placement:
+                                constraints: [node.role == worker]
         app.py:
                 build: .
                 container_name: app.py
@@ -22,4 +25,7 @@ services:
                         - db_mysql:db_mysql
                 ports:
                         - "5000:5000"
+                deploy:
+                        placement:
+                                constraints: [node.role == worker]
         
