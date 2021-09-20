@@ -16,7 +16,7 @@ services:
                 deploy:
                         placement:
                                 constraints: [node.role == worker]
-        app.py:
+        app:
                 image: 127.0.0.1:5000/app
                 build: .
                 container_name: app
