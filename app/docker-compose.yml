@@ -12,20 +12,20 @@ services:
                         MYSQL_USER: testuser
                         MYSQL_PASSWORD: testpassword
                 volumes:
-                        - ./db:/docker-entrypoint-initdb.d/:ro
+                        - "/home/vagrant/DSproject/app/db:/docker-entrypoint-initdb.d/:ro"
                 deploy:
                         placement:
                                 constraints: [node.role == worker]
         app.py:
+                image: 127.0.0.1:5000/app
                 build: .
-                container_name: app.py
+                container_name: app
                 depends_on:
                         - db_mysql
                 links:
                         - db_mysql:db_mysql
                 ports:
-                        - "5000:5000"
+                        - "8000:8000"
                 deploy:
                         placement:
                                 constraints: [node.role == worker]
-        
