@@ -27,9 +27,15 @@ Al ejecutar este comando se comenzará el proceso de creación de tres máquinas
 
 Una vez aprovisionadas se puede ingresar al nodo `manager` a través del comando `vagrant ssh manager`
 
-# Despliegue
+# Probar con Docker Compose
 
-Una vez dentro del nodo `manager`, ingrese a la carpeta `DSproject/app` y ejecute los siguientes comandos:
+Una vez dentro del nodo `manager`, ingrese a la carpeta `DSproject/app`. Inicia la aplicación con `docker-compose up -d`. Esto construye la imagen de la aplicación web, extrae la imagen de mysql si no la tienes ya, y crea dos contenedores. Luego, comprueba que la aplicación se está ejecutando con `docker-compose ps`. Puedes probar la aplicación con `curl -X POST -d "{ \"content\": \"Sustentar el proyecto!!\"}" -H "Content-Type: application/json" http://localhost:8000/`. 
+
+Para terminar la aplicación usa `docker-compose down --volumes`.
+
+# Despliegue stack
+
+En la misma carpeta `DSproject/app` ejecuta los siguientes comandos:
 
 * `docker service create --name registry --publish published=5000,target=5000 registry:2`
 * `docker-compose push`
