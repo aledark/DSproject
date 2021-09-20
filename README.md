@@ -29,7 +29,7 @@ Una vez aprovisionadas se puede ingresar al nodo `manager` a través del comando
 
 # Despliegue
 
-Una vez dentro del nodo `manager`, ingresar a la carpeta `DSproject/app` y ejecutar los siguientes comandos:
+Una vez dentro del nodo `manager`, ingrese a la carpeta `DSproject/app` y ejecute los siguientes comandos:
 
 * `docker service create --name registry --publish published=5000,target=5000 registry:2`
 * `docker-compose push`
@@ -37,9 +37,11 @@ Una vez dentro del nodo `manager`, ingresar a la carpeta `DSproject/app` y ejecu
 
 Comprueba que se está ejecutando con `docker stack services stackdemo`. Una vez que esté funcionando, debería ver 1/1 en REPLICAS para ambos servicios.
 
-Finalmente, puedes probar la aplicación con curl: `curl http://address-of-the-node:8000`
+Finalmente, puedes probar la aplicación con curl: `curl -X POST -d "{ \"content\": \"Sustentar el proyecto!!\"}" -H "Content-Type: application/json" http://address-of-the-node:8000/`
 
 # Baja la aplicación
+
+Para terminar los servicios, ejecute los siguientes comandos:
 
 * `docker stack rm stackdemo`
 * `docker service rm registry`
